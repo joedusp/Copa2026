@@ -40,7 +40,7 @@ body{
   position:fixed;inset:0;z-index:999;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:1.6rem;padding:2rem;
-  background:linear-gradient(160deg,#020c1b 0%,#061428 60%,#0a1f3c 100%);
+  background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 60%,var(--bg3) 100%);
   transition:opacity .5s,transform .5s;overflow-y:auto;
 }
 #welcome.hide{opacity:0;pointer-events:none;transform:scale(1.04)}
@@ -51,15 +51,15 @@ body{
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center}
 .wc-sub{color:#5a7a99;font-size:.8rem;text-align:center}
 .w-section{width:100%;max-width:300px}
-.w-label{font-size:.68rem;font-weight:700;letter-spacing:.08em;color:#5a7a99;
+.w-label{font-size:.68rem;font-weight:700;letter-spacing:.08em;color:var(--text3);
   text-transform:uppercase;text-align:center;margin-bottom:.6rem}
 .toggle-row{display:flex;gap:.8rem;justify-content:center}
 .opt-btn{display:flex;flex-direction:column;align-items:center;gap:.4rem;
   padding:.8rem 1.2rem;border-radius:14px;cursor:pointer;border:2px solid transparent;
-  background:rgba(255,255,255,.06);color:#8fabc7;font-size:.78rem;font-weight:600;
+  background:var(--bg3);color:var(--text2);font-size:.78rem;font-weight:600;
   transition:all .2s;flex:1;max-width:120px}
 .opt-btn .icon{font-size:1.6rem}
-.opt-btn.active{border-color:var(--accent);background:rgba(59,130,246,.15);color:#60a5fa}
+.opt-btn.active{border-color:var(--accent);background:var(--bg4);color:var(--accent)}
 .enter-btn{
   width:100%;max-width:280px;padding:.95rem;border-radius:14px;border:none;
   background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff;
@@ -336,6 +336,9 @@ body{
     <div class="nav-tab" data-page="bracket" onclick="showPage('bracket')">
       <span data-pt="Mata-Mata" data-en="Knockout" data-it="Eliminazione" data-es="Eliminatoria">Mata-Mata</span>
     </div>
+    <div class="nav-tab" data-page="today" onclick="showPage('today')">
+      📅 <span data-pt="Hoje" data-en="Today" data-it="Oggi" data-es="Hoy">Hoje</span>
+    </div>
     <div class="nav-tab" data-page="progress" onclick="showPage('progress')">
       <span data-pt="Progresso" data-en="Progress" data-it="Progressi" data-es="Progreso">Progresso</span>
     </div>
@@ -344,6 +347,9 @@ body{
 
 <!-- SCROLLABLE MAIN -->
 <div id="main" style="display:none">
+  <div class="page" id="page-today">
+    <div class="group-section" id="today-content"></div>
+  </div>
   <div class="page active" id="page-groups">
     <div class="group-nav" id="group-nav"></div>
     <div class="group-section" id="group-content"></div>
@@ -389,6 +395,7 @@ const T={
     tz:'Fuso Horário',enter:'Entrar',dark:'Escuro',light:'Claro',
     cleared:'Resultados apagados!',sub:'48 Seleções · 104 Jogos',
     et:'Prorrogação',total:'Total após ET',
+    today:'Jogos de Hoje',noGames:'Nenhum jogo hoje',nextMatch:'A próxima partida será em',days:'dias',over:'A Copa acabou!'
   },
   en:{
     groups:'Groups',knockout:'Knockout',progress:'Progress',
@@ -405,6 +412,7 @@ const T={
     tz:'Time Zone',enter:'Enter',dark:'Dark',light:'Light',
     cleared:'Results cleared!',sub:'48 Teams · 104 Matches',
     et:'Extra Time',total:'Total after ET',
+    today:'Today\'s Matches',noGames:'No games today',nextMatch:'The next match is in',days:'days',over:'The World Cup is over!'
   },
   it:{
     groups:'Gruppi',knockout:'Eliminazione',progress:'Progressi',
@@ -539,12 +547,13 @@ const TZS=[
   {key:'edt', flag:'🇺🇸', et:0,   short:'EDT',  pt:'Nova York (EDT)',       en:'New York (EDT)',        it:'New York (EDT)',        es:'Nueva York (EDT)'},
   {key:'cot', flag:'🇨🇴', et:-1,  short:'COT',  pt:'Bogotá (COT)',          en:'Bogota (COT)',          it:'Bogotà (COT)',          es:'Bogotá (COT)'},
   {key:'cdt', flag:'🇲🇽', et:-1,  short:'CDT',  pt:'Cd. México (CDT)',      en:'Mexico City (CDT)',     it:'Città del Messico (CDT)',es:'Ciudad de México (CDT)'},
+  {key:'hou', flag:'🇺🇸', et:-1,  short:'CDT',  pt:'Houston/Dallas/Austin', en:'Houston/Dallas/Austin', it:'Houston/Dallas/Austin', es:'Houston/Dallas/Austin'},
   {key:'mdt', flag:'🇺🇸', et:-2,  short:'MDT',  pt:'Denver (MDT)',          en:'Denver (MDT)',          it:'Denver (MDT)',          es:'Denver (MDT)'},
   {key:'pdt', flag:'🇺🇸', et:-3,  short:'PDT',  pt:'Los Angeles (PDT)',     en:'Los Angeles (PDT)',     it:'Los Angeles (PDT)',     es:'Los Ángeles (PDT)'},
   {key:'wet', flag:'🇵🇹', et:5,   short:'WEST', pt:'Lisboa (WEST)',         en:'Lisbon (WEST)',         it:'Lisbona (WEST)',        es:'Lisboa (WEST)'},
   {key:'bst', flag:'🇬🇧', et:5,   short:'BST',  pt:'Londres (BST)',         en:'London (BST)',          it:'Londra (BST)',          es:'Londres (BST)'},
   {key:'wat', flag:'🇳🇬', et:5,   short:'WAT',  pt:'Lagos (WAT)',           en:'Lagos (WAT)',           it:'Lagos (WAT)',           es:'Lagos (WAT)'},
-  {key:'ces', flag:'🇪🇸', et:6,   short:'CEST', pt:'Madri/Roma (CEST)',     en:'Madrid/Rome (CEST)',    it:'Madrid/Roma (CEST)',    es:'Madrid/Roma (CEST)'},
+  {key:'ces', flag:'🇪🇸', et:6,   short:'CEST', pt:'Madri/Barcelona (CEST)',en:'Madrid/Barcelona (CEST)',it:'Madrid/Barcellona (CEST)',es:'Madrid/Barcelona (CEST)'},
   {key:'sas', flag:'🇿🇦', et:6,   short:'SAST', pt:'Joanesburgo (SAST)',    en:'Johannesburg (SAST)',   it:'Johannesburg (SAST)',   es:'Johannesburgo (SAST)'},
   {key:'ast', flag:'🇸🇦', et:7,   short:'AST',  pt:'Riad (AST)',            en:'Riyadh (AST)',          it:'Riad (AST)',            es:'Riad (AST)'},
   {key:'gst', flag:'🇦🇪', et:8,   short:'GST',  pt:'Dubai (GST)',           en:'Dubai (GST)',           it:'Dubai (GST)',           es:'Dubái (GST)'},
@@ -769,7 +778,7 @@ function matchTimes(m){
   const loc=addH(et,ve.tz);
   const tzInfo=getTZ();
   const tz=addH(et,tzInfo.et);
-  return{loc:fmtT(loc),tz:fmtT(tz),tzShort:tzInfo.short,date:fmtD(et)};
+  return{loc:fmtT(loc),et:fmtT(et),tz:fmtT(tz),tzShort:tzInfo.short,date:fmtD(et)};
 }
 
 // ══ STANDINGS ══
@@ -946,8 +955,8 @@ function renderGroup(grp){
     const mn=MN[m.id]||'';
     h+=`<div class="match-card${done?' done':''}">
       <div class="mc-header">
-        <div class="mc-hrow1"><span class="mc-num">M${mn}</span><span class="mc-dot">·</span><span>${times.date}</span><span class="mc-dot">·</span><span>📍 ${ve[LANG]||ve.en}</span></div>
-        <div class="mc-hrow2">🕐 ${times.loc} ${t('local')} · ${times.tz} ${times.tzShort}</div>
+        <div class="mc-hrow1"><span class="mc-num">M${mn}</span><span class="mc-dot">·</span><span>📅 ${times.date}</span><span class="mc-dot">·</span><span>🕐 ${times.loc} ${t('local')} | ${times.et} ET | ${times.tz} ${times.tzShort}</span></div>
+        <div class="mc-hrow2" style="margin-top:2px;">📍 ${ve[LANG]||ve.en}</div>
       </div>
       <div class="mc-body">
         <div class="mc-team">
@@ -1083,10 +1092,9 @@ function renderKM(m,res){
         value="${pav}" oninput="saveK('${m.id}','pa',this.value)" ${dis}>
     </div>`:'';
   return`<div class="bk-match">
-    <div class="bk-hdr">
-      <span class="bk-num">M${mn}</span>
-      <span>📅 ${times.date} · 🕐 ${times.loc} ${t('local')} / ${times.tz} ${times.tzShort}</span>
-      <span>📍 ${ve[LANG]||ve.en}</span>
+    <div class="bk-hdr" style="display:flex; flex-direction:column; gap:2px; text-align:center;">
+      <div style="font-weight:bold; color:var(--text1); font-size:0.9em;"><span class="bk-num">M${mn}</span> <span class="mc-dot">·</span> 📅 ${times.date} <span class="mc-dot">·</span> 🕐 ${times.loc} ${t('local')} | ${times.et} ET | ${times.tz} ${times.tzShort}</div>
+      <div style="font-size:0.85em; color:var(--text2);">📍 ${ve[LANG]||ve.en}</div>
     </div>
     <div class="bk-lbl">90'</div>
     <div class="bk-team${hWin?' winner':''}">
@@ -1117,6 +1125,99 @@ function renderKM(m,res){
         ${liveMatch.cards ? `<div>🟨/🟥 ${liveMatch.cards}</div>` : ''}
       </div>` : ''}
   </div>`;
+}
+
+// ══ RENDER TODAY ══
+function renderToday(){
+  const now = new Date();
+  const etOffset = -4; // ET is UTC-4 in summer
+  const etNow = new Date(now.getTime() + (now.getTimezoneOffset() * 60000) + (etOffset * 3600000));
+  const y = etNow.getFullYear();
+  const m = String(etNow.getMonth() + 1).padStart(2, '0');
+  const d = String(etNow.getDate()).padStart(2, '0');
+  const todayStr = `${y}-${m}-${d}`;
+  
+  const allMatches = [...GM, ...KM];
+  const todayMatches = allMatches.filter(match => match.d === todayStr);
+  todayMatches.sort((a,b) => a.t.localeCompare(b.t));
+
+  let h = `<div class="sec-label">📅 ${t('today')}</div>`;
+  
+  if (todayMatches.length > 0) {
+    const res = resolveKO();
+    todayMatches.forEach(match => {
+      if (match.g) {
+        const liveMatch = LIVE[match.id];
+        const r = liveMatch || R[match.id] || {};
+        const dis = liveMatch ? 'disabled' : '';
+        const done=r.h!==''&&r.h!=null&&!isNaN(parseInt(r.h));
+        const times=matchTimes(match);
+        const ve=V[match.v];
+        const mn=MN[match.id]||'';
+        h+=`<div class="match-card${done?' done':''}">
+          <div class="mc-header">
+            <div class="mc-hrow1"><span class="mc-num">M${mn}</span><span class="mc-dot">·</span><span>📅 ${times.date}</span><span class="mc-dot">·</span><span>🕐 ${times.loc} ${t('local')} | ${times.et} ET | ${times.tz} ${times.tzShort}</span></div>
+            <div class="mc-hrow2" style="margin-top:2px;">📍 ${ve[LANG]||ve.en}</div>
+          </div>
+          <div class="mc-body">
+            <div class="mc-team">
+              <span class="mc-flag">${TM[match.h].flag}</span>
+              <span class="mc-name">${TM[match.h][LANG]||TM[match.h].en}</span>
+            </div>
+            <div class="score-wrap">
+              <input class="s-inp" type="number" min="0" max="99" inputmode="numeric" placeholder="–"
+                value="${r.h!=null&&r.h!==''?r.h:''}"
+                oninput="saveG('${match.id}','h',this.value)" ${dis}>
+              <span class="s-sep">:</span>
+              <input class="s-inp" type="number" min="0" max="99" inputmode="numeric" placeholder="–"
+                value="${r.a!=null&&r.a!==''?r.a:''}"
+                oninput="saveG('${match.id}','a',this.value)" ${dis}>
+            </div>
+            <div class="mc-team">
+              <span class="mc-flag">${TM[match.a].flag}</span>
+              <span class="mc-name">${TM[match.a][LANG]||TM[match.a].en}</span>
+            </div>
+          </div>
+          ${liveMatch && (liveMatch.time || liveMatch.scorers || liveMatch.cards) ? `
+          <div class="live-events" style="font-size:0.8rem; color:var(--text2); text-align:center; padding:0.5rem; border-top:1px solid var(--border); background:rgba(0,0,0,0.1)">
+            ${liveMatch.time ? `<div style="color:#e74c3c; font-weight:bold; margin-bottom:4px">⏱️ ${liveMatch.time}</div>` : ''}
+            ${liveMatch.scorers ? `<div style="margin-bottom:2px">⚽ ${liveMatch.scorers}</div>` : ''}
+            ${liveMatch.cards ? `<div>🟨/🟥 ${liveMatch.cards}</div>` : ''}
+          </div>` : ''}
+        </div>`;
+      } else {
+        h += renderKM(match, res);
+      }
+    });
+  } else {
+    const futureMatches = allMatches.filter(match => match.d > todayStr);
+    if (futureMatches.length > 0) {
+      futureMatches.sort((a,b) => a.d.localeCompare(b.d));
+      const nextDateStr = futureMatches[0].d;
+      const nextDateObj = new Date(nextDateStr + 'T00:00:00-04:00');
+      const diffTime = nextDateObj - etNow;
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      const mPT=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+      const mEN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const ms=LANG==='pt'?mPT:mEN;
+      const fmtNextDate = `${nextDateObj.getDate()} ${ms[nextDateObj.getMonth()]}`;
+      h += `
+        <div style="text-align:center; padding: 3rem 1rem; color:var(--text2);">
+          <div style="font-size:3rem; margin-bottom:1rem;">😴</div>
+          <div style="font-size:1.2rem; font-weight:bold; color:var(--text1); margin-bottom:0.5rem;">${t('noGames')}</div>
+          <div>${t('nextMatch')} <strong>${diffDays} ${t('days')}</strong> (${fmtNextDate}).</div>
+        </div>
+      `;
+    } else {
+      h += `
+        <div style="text-align:center; padding: 3rem 1rem; color:var(--text2);">
+          <div style="font-size:3rem; margin-bottom:1rem;">🏆</div>
+          <div style="font-size:1.2rem; font-weight:bold; color:var(--text1);">${t('over')}</div>
+        </div>
+      `;
+    }
+  }
+  document.getElementById('today-content').innerHTML = h;
 }
 
 // ══ RENDER PROGRESS ══
@@ -1186,6 +1287,7 @@ function showPage(pg){
   document.querySelector(`[data-page="${pg}"]`).classList.add('active');
   if(pg==='groups'){renderGroupNav();renderGroup(CG);}
   if(pg==='bracket'){renderKnockoutNav();renderBracket();}
+  if(pg==='today')renderToday();
   if(pg==='progress')renderProgress();
 }
 
