@@ -136,6 +136,8 @@ body{
 .pts-col{font-weight:700;color:var(--text);font-size:.85rem}
 .sg-pos{color:var(--accent3)}
 .sg-neg{color:var(--red)}
+.elim-row{background:rgba(239,68,68,.08) !important;}
+.pass-row{background:rgba(34,197,94,.08) !important;}
 
 /* ── MATCH CARD ── */
 .match-card{
@@ -285,6 +287,12 @@ body{
       <div class="opt-btn" id="btn-es" onclick="setLang('es')">
         <span class="icon">🇪🇸</span>Español
       </div>
+      <div class="opt-btn" id="btn-fr" onclick="setLang('fr')">
+        <span class="icon">🇫🇷</span>Français
+      </div>
+      <div class="opt-btn" id="btn-ja" onclick="setLang('ja')">
+        <span class="icon">🇯🇵</span>日本語
+      </div>
     </div>
   </div>
 
@@ -337,7 +345,10 @@ body{
       <span data-pt="Mata-Mata" data-en="Knockout" data-it="Eliminazione" data-es="Eliminatoria">Mata-Mata</span>
     </div>
     <div class="nav-tab" data-page="today" onclick="showPage('today')">
-      📅 <span data-pt="Hoje" data-en="Today" data-it="Oggi" data-es="Hoy">Hoje</span>
+      📅 <span data-pt="Hoje" data-en="Today" data-it="Oggi" data-es="Hoy" data-fr="Aujourd'hui" data-ja="今日">Hoje</span>
+    </div>
+    <div class="nav-tab" data-page="thirds" onclick="showPage('thirds')">
+      🥉 <span data-pt="3º Lugar" data-en="3rd Place" data-it="3º Posto" data-es="3º Lugar" data-fr="3e Place" data-ja="3位">3º Lugar</span>
     </div>
     <div class="nav-tab" data-page="progress" onclick="showPage('progress')">
       <span data-pt="Progresso" data-en="Progress" data-it="Progressi" data-es="Progreso">Progresso</span>
@@ -349,6 +360,9 @@ body{
 <div id="main" style="display:none">
   <div class="page" id="page-today">
     <div class="group-section" id="today-content"></div>
+  </div>
+  <div class="page" id="page-thirds">
+    <div class="group-section" id="thirds-content"></div>
   </div>
   <div class="page active" id="page-groups">
     <div class="group-nav" id="group-nav"></div>
@@ -418,8 +432,8 @@ const T={
     groups:'Gruppi',knockout:'Eliminazione',progress:'Progressi',
     standing:'Classifica',matches:'Partite',
     pos:'Pos',pj:'PG',pts:'Pts',w:'V',d:'P',l:'S',gf:'GF',ga:'GS',gd:'DR',
-    R32:'Sedicesimi di finale',R16:'Ottavi di finale',
-    QF:'Quarti di finale',SF:'Semifinali','3P':'Terzo posto',FIN:'Finale',
+    R32:'Sedicesimi',R16:'Ottavi',
+    QF:'Quarti',SF:'Semifinali','3P':'Terzo posto',FIN:'Finale',
     local:'locale',sp:'SP',day:'Giorno',pen:'Rigori',
     win:'VINCITORE',reset:'Eliminare tutti i risultati?',
     played:'disputate',games:'partite',
@@ -429,13 +443,14 @@ const T={
     tz:'Fuso orario',enter:'Entra',dark:'Scuro',light:'Chiaro',
     cleared:'Risultati eliminati!',sub:'48 Squadre · 104 Partite',
     et:'Tempo supplementare',total:'Totale dopo ET',
+    today:'Partite di oggi',noGames:'Nessuna partita oggi',nextMatch:'La prossima partita è tra',days:'giorni',over:'La Coppa del Mondo è finita!'
   },
   es:{
     groups:'Grupos',knockout:'Eliminatoria',progress:'Progreso',
     standing:'Clasificación',matches:'Partidos',
     pos:'Pos',pj:'PJ',pts:'Pts',w:'V',d:'E',l:'D',gf:'GF',ga:'GC',gd:'DG',
-    R32:'Ronda de 32',R16:'Octavos de final',
-    QF:'Cuartos de final',SF:'Semifinales','3P':'Tercer lugar',FIN:'Final',
+    R32:'Ronda de 32',R16:'Octavos',
+    QF:'Cuartos',SF:'Semifinales','3P':'Tercer lugar',FIN:'Final',
     local:'local',sp:'SP',day:'Día',pen:'Penales',
     win:'CAMPEÓN',reset:'¿Borrar todos los resultados?',
     played:'jugados',games:'partidos',
@@ -445,7 +460,42 @@ const T={
     tz:'Zona horaria',enter:'Entrar',dark:'Oscuro',light:'Claro',
     cleared:'¡Resultados borrados!',sub:'48 Selecciones · 104 Partidos',
     et:'Prórroga',total:'Total tras prórroga',
+    today:'Partidos de hoy',noGames:'No hay partidos hoy',nextMatch:'El próximo partido es en',days:'días',over:'¡La Copa del Mundo ha terminado!'
   },
+  fr:{
+    groups:'Groupes',knockout:'Phase finale',progress:'Progrès',
+    standing:'Classement',matches:'Matchs',
+    pos:'Pos',pj:'MJ',pts:'Pts',w:'V',d:'N',l:'D',gf:'BP',ga:'BC',gd:'DB',
+    R32:'Seizièmes',R16:'Huitièmes',
+    QF:'Quarts',SF:'Demi-finales','3P':'Troisième',FIN:'Finale',
+    local:'locale',sp:'SP',day:'Jour',pen:'T.a.b.',
+    win:'VAINQUEUR',reset:'Effacer tous les résultats ?',
+    played:'joués',games:'matchs',
+    titleShort:'Coupe du Monde 2026',
+    goalsTot:'Buts',avg:'Moy/match',
+    groupS:'Groupes',koS:'Phase finale',
+    tz:'Fuseau horaire',enter:'Entrer',dark:'Sombre',light:'Clair',
+    cleared:'Résultats effacés !',sub:'48 Équipes · 104 Matchs',
+    et:'Prolongation',total:'Total après prol.',
+    today:'Matchs du jour',noGames:'Pas de matchs aujourd\'hui',nextMatch:'Le prochain match est dans',days:'jours',over:'La Coupe du Monde est terminée !'
+  },
+  ja:{
+    groups:'グループ',knockout:'ノックアウト',progress:'進行状況',
+    standing:'順位表',matches:'試合',
+    pos:'順位',pj:'試合',pts:'勝点',w:'勝',d:'分',l:'負',gf:'得点',ga:'失点',gd:'得失',
+    R32:'ラウンド32',R16:'ラウンド16',
+    QF:'準々決勝',SF:'準決勝','3P':'3位決定戦',FIN:'決勝',
+    local:'現地',sp:'SP',day:'日',pen:'PK戦',
+    win:'優勝',reset:'全ての結果を消去しますか？',
+    played:'試合完了',games:'試合',
+    titleShort:'ワールドカップ2026',
+    goalsTot:'総ゴール',avg:'平均',
+    groupS:'グループ',koS:'ノックアウト',
+    tz:'タイムゾーン',enter:'入る',dark:'ダーク',light:'ライト',
+    cleared:'結果を消去しました！',sub:'48チーム · 104試合',
+    et:'延長戦',total:'延長戦後の合計',
+    today:'今日の試合',noGames:'今日の試合はありません',nextMatch:'次の試合まで',days:'日',over:'ワールドカップは終了しました！'
+  }
 };
 const t=k=>T[LANG][k]||k;
 
@@ -823,7 +873,7 @@ function best3rd(){
     return s.length>=3?{...s[2],grp:g}:null;
   }).filter(Boolean);
   thirds.sort((a,b)=>b.pts-a.pts||b.gd-a.gd||b.gf-a.gf);
-  return thirds.slice(0,8);
+  return thirds;
 }
 function assign3rd(q8){
   const assign={};
@@ -852,7 +902,8 @@ function resolveKO(){
     const{first,second,third}=qualifiers(g);
     ql[`1${g}`]=first||null;ql[`2${g}`]=second||null;ql[`3${g}`]=third||null;
   });
-  const b8=best3rd();
+  const bAll=best3rd();
+  const b8=bAll.slice(0,8);
   const a3=b8.length===8?assign3rd(b8):{};
   KM.filter(m=>m.rd==='R32').forEach(m=>{
     let h=null,a=null;
@@ -934,7 +985,14 @@ function renderGroup(grp){
   st.forEach((s,i)=>{
     const tm=TM[s.tm];
     const sg=s.gd>0?`<span class="sg-pos">+${s.gd}</span>`:s.gd<0?`<span class="sg-neg">${s.gd}</span>`:s.gd;
-    h+=`<tr>
+    let elimClass = '';
+    if (i === 2) {
+      const bAll = best3rd();
+      const idx = bAll.findIndex(x=>x.tm===s.tm);
+      if (idx >= 8) elimClass = ' class="elim-row"';
+      else elimClass = ' class="pass-row"';
+    }
+    h+=`<tr${elimClass}>
       <td><span class="pos-badge">${i+1}</span></td>
       <td><div class="team-cell"><span class="flag">${tm.flag}</span>
         <span class="tm-name">${LANG==='pt'?tm.s:(tm[LANG]||tm.en)}</span></div></td>
@@ -996,7 +1054,14 @@ function refreshStandings(){
   st.forEach((s,i)=>{
     const tm=TM[s.tm];
     const sg=s.gd>0?`<span class="sg-pos">+${s.gd}</span>`:s.gd<0?`<span class="sg-neg">${s.gd}</span>`:s.gd;
-    rows+=`<tr>
+    let elimClass = '';
+    if (i === 2) {
+      const bAll = best3rd();
+      const idx = bAll.findIndex(x=>x.tm===s.tm);
+      if (idx >= 8) elimClass = ' class="elim-row"';
+      else elimClass = ' class="pass-row"';
+    }
+    rows+=`<tr${elimClass}>
       <td><span class="pos-badge">${i+1}</span></td>
       <td><div class="team-cell"><span class="flag">${tm.flag}</span>
         <span class="tm-name">${LANG==='pt'?tm.s:(tm[LANG]||tm.en)}</span></div></td>
@@ -1092,9 +1157,9 @@ function renderKM(m,res){
         value="${pav}" oninput="saveK('${m.id}','pa',this.value)" ${dis}>
     </div>`:'';
   return`<div class="bk-match">
-    <div class="bk-hdr" style="display:flex; flex-direction:column; gap:2px; text-align:center;">
-      <div style="font-weight:bold; color:var(--text1); font-size:0.9em;"><span class="bk-num">M${mn}</span> <span class="mc-dot">·</span> 📅 ${times.date} <span class="mc-dot">·</span> 🕐 ${times.loc} ${t('local')} | ${times.et} ET | ${times.tz} ${times.tzShort}</div>
-      <div style="font-size:0.85em; color:var(--text2);">📍 ${ve[LANG]||ve.en}</div>
+    <div class="mc-header">
+      <div class="mc-hrow1"><span class="mc-num">M${mn}</span><span class="mc-dot">·</span><span>📅 ${times.date}</span><span class="mc-dot">·</span><span>🕐 ${times.loc} ${t('local')} | ${times.et} ET | ${times.tz} ${times.tzShort}</span></div>
+      <div class="mc-hrow2" style="margin-top:2px;">📍 ${ve[LANG]||ve.en} | 🔑 ${m.hn} vs ${m.an}</div>
     </div>
     <div class="bk-lbl">90'</div>
     <div class="bk-team${hWin?' winner':''}">
@@ -1220,6 +1285,35 @@ function renderToday(){
   document.getElementById('today-content').innerHTML = h;
 }
 
+// ══ RENDER THIRDS ══
+function renderThirds(){
+  const thirds = best3rd();
+  let h=`<div class="sec-label">🥉 ${t('3P')}</div>
+  <table class="st-table"><thead><tr>
+    <th>${t('pos')}</th><th>Seleção</th><th>${t('pj')}</th>
+    <th>${t('w')}</th><th>${t('d')}</th><th>${t('l')}</th>
+    <th>${t('gf')}</th><th>${t('ga')}</th><th>${t('gd')}</th><th>${t('pts')}</th>
+  </tr></thead><tbody>`;
+  
+  thirds.forEach((s,i)=>{
+    const tm=TM[s.tm];
+    const sg=s.gd>0?`<span class="sg-pos">+${s.gd}</span>`:s.gd<0?`<span class="sg-neg">${s.gd}</span>`:s.gd;
+    const isElim = i >= 8;
+    const rowClass = isElim ? ' class="elim-row"' : ' class="pass-row"';
+    const badgeBg = isElim ? 'background:#ef4444;color:#fff' : 'background:#22c55e;color:#fff';
+    h+=`<tr${rowClass}>
+      <td><span class="pos-badge" style="${badgeBg}">${i+1}</span></td>
+      <td><div class="team-cell"><span class="flag">${tm.flag}</span>
+        <span class="tm-name">${LANG==='pt'?tm.s:(tm[LANG]||tm.en)}</span> <span style="font-size:0.6rem;color:var(--text3)">(G${s.grp})</span></div></td>
+      <td>${s.pj}</td><td>${s.w}</td><td>${s.d}</td><td>${s.l}</td>
+      <td>${s.gf}</td><td>${s.ga}</td><td>${sg}</td>
+      <td class="pts-col">${s.pts}</td>
+    </tr>`;
+  });
+  h+=`</tbody></table>`;
+  document.getElementById('thirds-content').innerHTML = h;
+}
+
 // ══ RENDER PROGRESS ══
 function renderProgress(){
   const p=progress();
@@ -1288,13 +1382,14 @@ function showPage(pg){
   if(pg==='groups'){renderGroupNav();renderGroup(CG);}
   if(pg==='bracket'){renderKnockoutNav();renderBracket();}
   if(pg==='today')renderToday();
+  if(pg==='thirds')renderThirds();
   if(pg==='progress')renderProgress();
 }
 
 // ══ WELCOME ══
 function setLang(l){
   LANG=l;
-  ['pt','en','it','es'].forEach(x=>{
+  ['pt','en','it','es','fr','ja'].forEach(x=>{
     const b=document.getElementById('btn-'+x);
     if(b)b.classList.toggle('active',x===l);
   });
@@ -1341,7 +1436,7 @@ function enterApp(){
   },480);
 }
 function applyLang(){
-  const flags={pt:'🇧🇷',en:'🇬🇧',it:'🇮🇹',es:'🇪🇸'};
+  const flags={pt:'🇧🇷',en:'🇬🇧',it:'🇮🇹',es:'🇪🇸',fr:'🇫🇷',ja:'🇯🇵'};
   document.getElementById('lang-btn').textContent=(flags[LANG]||'🌐')+' '+LANG.toUpperCase();
   document.getElementById('h-title').textContent=t('titleShort');
   document.querySelectorAll('#nav [data-pt]').forEach(el=>{
@@ -1358,8 +1453,8 @@ function toggleTheme(){
   document.getElementById('theme-btn').textContent=THEME==='dark'?'🌙':'☀️';
 }
 function toggleLang(){
-  const langs=['pt','en','it','es'];
-  LANG=langs[(langs.indexOf(LANG)+1)%4];
+  const langs=['pt','en','it','es','fr','ja'];
+  LANG=langs[(langs.indexOf(LANG)+1)%6];
   localStorage.setItem('lang',LANG);
   applyLang();
   const activePg=document.querySelector('.nav-tab.active')?.dataset.page||'groups';
