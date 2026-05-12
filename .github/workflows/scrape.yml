@@ -1,0 +1,33 @@
+name: World Cup 2026 Live Update
+
+on:
+  schedule:
+    - cron: '*/15 * * * *' # Roda a cada 15 minutos
+  workflow_dispatch: # Permite rodar manualmente
+
+jobs:
+  update-results:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run Bot
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+        run: node bot.js
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add results.json state.json
+          git commit -m "Update live results [skip ci]" || echo "No changes to commit"
+          git push
