@@ -2,7 +2,7 @@ const fs = require('fs');
 const https = require('https');
 const path = require('path');
 
-const API_KEY = process.env.API_KEY || '6a0ae2f262c8664f458eaff47f138725';
+const API_KEY = process.env.API_KEY;
 const RESULTS_FILE = path.join(__dirname, 'results.json');
 const STATE_FILE = path.join(__dirname, 'state.json');
 
