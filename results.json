@@ -1,13 +1,1 @@
-{
-  "g1": {
-    "h": 0,
-    "a": 0,
-    "status": "FT",
-    "elapsed": 90,
-    "events": [
-      {"time": 15, "team": "h", "type": "Goal", "player": "Richarlison"},
-      {"time": 45, "team": "h", "type": "Goal", "player": "Neymar"},
-      {"time": 78, "team": "a", "type": "Card", "detail": "Yellow Card", "player": "Defensor"}
-    ]
-  }
-}
+
