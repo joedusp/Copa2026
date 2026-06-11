@@ -177,18 +177,30 @@ for (const m of ALL_MATCHES) {
   const start    = getMatchTimeUTC(m.d, m.t);
   const diffMins = (now - start) / 60000;
   const r        = results[m.id];
-  const stuck    = r && r.status && !FINISHED_STATUSES.includes(r.status);
+  const isFinished  = r && FINISHED_STATUSES.includes(r.status);
+  const stuck       = r && r.status && !isFinished;
 
-  // Janela: 30 min antes do início até 4 horas depois
-  if ((diffMins >= -30 && diffMins <= 240) || stuck) {
+  // Caso 1: janela normal — 30 min antes até 4 horas depois do início
+  if (diffMins >= -30 && diffMins <= 240) {
     hasActiveMatch = true;
-    // Reduz intervalo perto do fim do 1T e do 2T
     if ((diffMins >= 75 && diffMins <= 110) || diffMins >= 130) pollInterval = 10;
+  }
+
+  // Caso 2: jogo travado em status não-finalizado (ex.: LIVE após queda de API)
+  if (stuck) {
+    hasActiveMatch = true;
+  }
+
+  // Caso 3 — CORREÇÃO DO BUG: jogo já deveria ter acontecido mas sem resultado
+  // gravado ainda (results.json vazio ou sem entrada para este jogo).
+  // Garante busca retroativa até 7 dias após o início.
+  if (diffMins > 0 && diffMins <= 10080 && !isFinished && !stuck) {
+    hasActiveMatch = true;
   }
 }
 
 if (!hasActiveMatch) {
-  console.log('Nenhuma partida na janela ativa. Encerrando.');
+  console.log('Nenhuma partida pendente ou na janela ativa. Encerrando.');
   process.exit(0);
 }
 
