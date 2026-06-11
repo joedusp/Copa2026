@@ -20,8 +20,6 @@ jobs:
           node-version: 20
 
       - name: Run Bot
-        env:
-          API_KEY: ${{ secrets.API_KEY }}
         run: node bot.js
 
       - name: Commit and Push changes
