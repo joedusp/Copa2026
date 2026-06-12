@@ -2,7 +2,7 @@ name: World Cup 2026 Live Update
 
 on:
   schedule:
-    - cron: '*/15 * * * *' # Roda a cada 15 minutos
+    - cron: '*/10 * * * *' # Roda a cada 10 minutos
   workflow_dispatch: # Permite rodar manualmente
 
 jobs:
