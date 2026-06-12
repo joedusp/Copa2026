@@ -87,15 +87,6 @@ const KM = [
 ];
 const ALL_MATCHES = [...GM, ...KM];
 
-// ══ MAPA SEQUENCIAL worldcup26.ir ══
-// worldcup26.ir numera os jogos de 1 a 104 seguindo a ordem do calendário oficial.
-// Essa tabela mapeia o id numérico deles para nosso id interno (g1…g72, k73…k104).
-// Funciona como mapeamento primário; nomes de times atuam como fallback.
-const WC_ID_TO_INTERNAL = {};
-ALL_MATCHES.forEach((m, idx) => {
-  WC_ID_TO_INTERNAL[String(idx + 1)] = m.id;
-});
-
 // ══ MAPA DE NOMES DE TIMES ══
 const TEAM_MAP = {
   'Mexico':'MEX','South Africa':'RSA','Korea Republic':'KOR','South Korea':'KOR',
@@ -229,13 +220,12 @@ function processGames(chunks) {
     // Pular jogos ainda não iniciados
     if (!finished && (elapsed === 'notstarted' || elapsed === '' || elapsed == null)) continue;
 
-    // ── Resolver ID interno ──────────────────────────────────────────────
-    let mId = WC_ID_TO_INTERNAL[wcId];
-    if (!mId && game.home_team_name_en && game.away_team_name_en) {
-      mId = findIdByTeams(game.home_team_name_en, game.away_team_name_en);
-    }
+    // ── Resolver ID interno — somente por nomes de times ───────────────
+    // O worldcup26.ir ordena por data, não por grupo, então o mapeamento
+    // sequencial está errado. Usamos apenas nomes de times como chave.
+    let mId = findIdByTeams(game.home_team_name_en, game.away_team_name_en);
     if (!mId) {
-      console.warn(`Jogo não mapeado — wcId:${wcId} | ${game.home_team_name_en} × ${game.away_team_name_en}`);
+      // Jogo eliminatório ou time não mapeado — ignora por enquanto
       continue;
     }
 
@@ -264,8 +254,16 @@ function processGames(chunks) {
     }
 
     // ── Artilheiros ────────────────────────────────────────────────────────
-    const hScorers = (game.home_scorers && game.home_scorers !== 'null') ? game.home_scorers.trim() : '';
-    const aScorers = (game.away_scorers && game.away_scorers !== 'null') ? game.away_scorers.trim() : '';
+    // worldcup26.ir retorna scorers no formato: {"Nome 45'","Nome 67'"}
+    // Precisamos limpar as chaves e aspas para exibir corretamente.
+    function parseScorers(raw) {
+      if (!raw || raw === 'null' || raw === '{}' || raw === '') return '';
+      const inner = raw.replace(/^\{|\}$/g, '').trim();
+      if (!inner) return '';
+      return inner.replace(/^"|"$/g, '').split('","').join(', ');
+    }
+    const hScorers = parseScorers(game.home_scorers);
+    const aScorers = parseScorers(game.away_scorers);
     r.scorers = [hScorers, aScorers].filter(Boolean).join(' | ');
     r.cards   = '';
 
