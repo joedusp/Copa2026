@@ -203,122 +203,118 @@ if (!hasActiveMatch) {
 // ══ FETCH ══
 console.log(`Buscando dados em worldcup26.ir...`);
 
-const req = https.get(API_URL, { timeout: 10000 }, (res) => {
-  let chunks = '';
-  res.on('data', d => chunks += d);
-  res.on('end', () => {
-    state.lastPoll = Date.now();
+// ══ FETCH COM RETRY ══
+// Tenta até MAX_RETRIES vezes com TIMEOUT_MS por tentativa.
+// Útil para instabilidades do servidor comunitário worldcup26.ir.
+const MAX_RETRIES = 3;
+const TIMEOUT_MS  = 20000; // 20 segundos por tentativa
 
-    try {
-      const data  = JSON.parse(chunks);
-      const games = Array.isArray(data.games) ? data.games : [];
+function processGames(chunks) {
+  const data  = JSON.parse(chunks);
+  const games = Array.isArray(data.games) ? data.games : [];
 
-      if (games.length === 0) {
-        console.warn('Resposta sem jogos. A API pode estar fora do ar.');
-        saveJSON(STATE_FILE, state);
-        return;
-      }
+  if (games.length === 0) {
+    console.warn('Resposta sem jogos. A API pode estar fora do ar.');
+    return false;
+  }
 
-      console.log(`${games.length} jogos recebidos.`);
-      let updated = false;
+  console.log(`${games.length} jogos recebidos.`);
+  let updated = false;
 
-      for (const game of games) {
-        const wcId       = String(game.id);
-        const finished   = game.finished === 'TRUE' || game.finished === true;
-        const elapsed    = game.time_elapsed; // 'notstarted' | '45' | 'HT' | '90' | 'FT' | 'ET' | 'PEN' ...
+  for (const game of games) {
+    const wcId     = String(game.id);
+    const finished = game.finished === 'TRUE' || game.finished === true;
+    const elapsed  = game.time_elapsed;
 
-        // Pular jogos ainda não iniciados
-        if (!finished && (elapsed === 'notstarted' || elapsed === '' || elapsed == null)) continue;
+    // Pular jogos ainda não iniciados
+    if (!finished && (elapsed === 'notstarted' || elapsed === '' || elapsed == null)) continue;
 
-        // ── Resolver ID interno ──────────────────────────────────────────────
-        // 1) Mapeamento sequencial (worldcup26.ir id 1–104 → g1…k104)
-        let mId = WC_ID_TO_INTERNAL[wcId];
-
-        // 2) Fallback por nomes de times (grupo apenas)
-        if (!mId && game.home_team_name_en && game.away_team_name_en) {
-          mId = findIdByTeams(game.home_team_name_en, game.away_team_name_en);
-        }
-
-        if (!mId) {
-          console.warn(`Jogo não mapeado — wcId:${wcId} | ${game.home_team_name_en} × ${game.away_team_name_en}`);
-          continue;
-        }
-
-        if (!results[mId]) results[mId] = {};
-        const r = results[mId];
-
-        // ── Placar ────────────────────────────────────────────────────────────
-        const hRaw = game.home_score;
-        const aRaw = game.away_score;
-        r.h = (hRaw !== null && hRaw !== 'null' && hRaw !== '') ? String(hRaw) : '';
-        r.a = (aRaw !== null && aRaw !== 'null' && aRaw !== '') ? String(aRaw) : '';
-
-        // ── Status e tempo ────────────────────────────────────────────────────
-        if (finished) {
-          r.status = 'FT';
-          r.time   = 'FT';
-        } else if (elapsed === 'HT') {
-          r.status = 'HT';
-          r.time   = 'HT';
-        } else if (elapsed === 'ET') {
-          r.status = 'ET';
-          r.time   = 'ET';
-        } else if (elapsed === 'PEN') {
-          r.status = 'PEN';
-          r.time   = 'PEN';
-        } else if (!isNaN(parseInt(elapsed))) {
-          r.status = 'LIVE';
-          r.time   = `${parseInt(elapsed)}'`;
-        } else {
-          // Valor desconhecido: gravamos como está para não perder info
-          r.status = String(elapsed);
-          r.time   = String(elapsed);
-        }
-
-        // ── Artilheiros ────────────────────────────────────────────────────────
-        // worldcup26.ir retorna strings separadas para casa e visitante.
-        // Valores "null" (string) ou vazios são ignorados.
-        const hScorers = (game.home_scorers && game.home_scorers !== 'null') ? game.home_scorers.trim() : '';
-        const aScorers = (game.away_scorers && game.away_scorers !== 'null') ? game.away_scorers.trim() : '';
-        r.scorers = [hScorers, aScorers].filter(Boolean).join(' | ');
-
-        // ── Cartões ─────────────────────────────────────────────────────────────
-        // worldcup26.ir não fornece dados de cartões no endpoint público /get/games.
-        // O campo fica vazio; o HTML já trata isso com gracefulness.
-        r.cards = '';
-
-        // ── Prorrogação / Pênaltis ───────────────────────────────────────────
-        // API não expõe placar parcial de prorrogação ou disputa de pênaltis.
-        // Os campos r.eh, r.ea, r.ph, r.pa não são preenchidos.
-        // Jogos eliminatórios definidos nos 90 min funcionam normalmente no HTML.
-
-        updated = true;
-      }
-
-      if (updated) {
-        saveJSON(RESULTS_FILE, results);
-        console.log('results.json atualizado com sucesso.');
-      } else {
-        console.log('Nenhuma partida ativa para atualizar no momento.');
-      }
-      saveJSON(STATE_FILE, state);
-
-    } catch (e) {
-      console.error('Erro ao processar resposta da API:', e);
-      saveJSON(STATE_FILE, state);
+    // ── Resolver ID interno ──────────────────────────────────────────────
+    let mId = WC_ID_TO_INTERNAL[wcId];
+    if (!mId && game.home_team_name_en && game.away_team_name_en) {
+      mId = findIdByTeams(game.home_team_name_en, game.away_team_name_en);
     }
+    if (!mId) {
+      console.warn(`Jogo não mapeado — wcId:${wcId} | ${game.home_team_name_en} × ${game.away_team_name_en}`);
+      continue;
+    }
+
+    if (!results[mId]) results[mId] = {};
+    const r = results[mId];
+
+    // ── Placar ────────────────────────────────────────────────────────────
+    const hRaw = game.home_score;
+    const aRaw = game.away_score;
+    r.h = (hRaw !== null && hRaw !== 'null' && hRaw !== '') ? String(hRaw) : '';
+    r.a = (aRaw !== null && aRaw !== 'null' && aRaw !== '') ? String(aRaw) : '';
+
+    // ── Status e tempo ────────────────────────────────────────────────────
+    if (finished) {
+      r.status = 'FT'; r.time = 'FT';
+    } else if (elapsed === 'HT') {
+      r.status = 'HT'; r.time = 'HT';
+    } else if (elapsed === 'ET') {
+      r.status = 'ET'; r.time = 'ET';
+    } else if (elapsed === 'PEN') {
+      r.status = 'PEN'; r.time = 'PEN';
+    } else if (!isNaN(parseInt(elapsed))) {
+      r.status = 'LIVE'; r.time = `${parseInt(elapsed)}'`;
+    } else {
+      r.status = String(elapsed); r.time = String(elapsed);
+    }
+
+    // ── Artilheiros ────────────────────────────────────────────────────────
+    const hScorers = (game.home_scorers && game.home_scorers !== 'null') ? game.home_scorers.trim() : '';
+    const aScorers = (game.away_scorers && game.away_scorers !== 'null') ? game.away_scorers.trim() : '';
+    r.scorers = [hScorers, aScorers].filter(Boolean).join(' | ');
+    r.cards   = '';
+
+    updated = true;
+  }
+
+  if (updated) {
+    saveJSON(RESULTS_FILE, results);
+    console.log('results.json atualizado com sucesso.');
+  } else {
+    console.log('Nenhuma partida ativa para atualizar no momento.');
+  }
+  return true;
+}
+
+function fetchWithRetry(attempt) {
+  if (attempt > MAX_RETRIES) {
+    console.error(`Falhou após ${MAX_RETRIES} tentativas. API indisponível.`);
+    saveJSON(STATE_FILE, state);
+    process.exit(1);
+  }
+
+  console.log(`Tentativa ${attempt}/${MAX_RETRIES}...`);
+
+  const req = https.get(API_URL, { timeout: TIMEOUT_MS }, (res) => {
+    let chunks = '';
+    res.on('data', d => chunks += d);
+    res.on('end', () => {
+      state.lastPoll = Date.now();
+      try {
+        processGames(chunks);
+        saveJSON(STATE_FILE, state);
+      } catch (e) {
+        console.error(`Erro ao processar resposta (tentativa ${attempt}):`, e.message);
+        setTimeout(() => fetchWithRetry(attempt + 1), 3000);
+      }
+    });
   });
-});
 
-req.on('timeout', () => {
-  console.error('Timeout na requisição à API. Encerrando.');
-  req.destroy();
-  saveJSON(STATE_FILE, state);
-  process.exit(1);
-});
+  req.on('timeout', () => {
+    console.warn(`Timeout na tentativa ${attempt}.`);
+    req.destroy();
+    setTimeout(() => fetchWithRetry(attempt + 1), 3000);
+  });
 
-req.on('error', (e) => {
-  console.error('Erro de rede:', e.message);
-  saveJSON(STATE_FILE, state);
-  process.exit(1);
-});
+  req.on('error', (e) => {
+    console.warn(`Erro de rede na tentativa ${attempt}: ${e.message}`);
+    setTimeout(() => fetchWithRetry(attempt + 1), 3000);
+  });
+}
+
+fetchWithRetry(1);
