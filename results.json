@@ -4,7 +4,7 @@
     "a": "0",
     "status": "FT",
     "time": "FT",
-    "scorers": "{“J. Quiñones 9'”,”R. Jiménez 67'”}",
+    "scorers": "“J. Quiñones 9'”,”R. Jiménez 67'”",
     "cards": ""
   },
   "g2": {
@@ -12,7 +12,7 @@
     "a": "1",
     "status": "FT",
     "time": "FT",
-    "scorers": "{\"I.B. Hwang 67'\",\"H.G. Oh 80'\"} | {\"L. Krejčí 59'\"}",
+    "scorers": "I.B. Hwang 67', H.G. Oh 80' | L. Krejčí 59'",
     "cards": ""
   },
   "g3": {
@@ -21,6 +21,14 @@
     "status": "FT",
     "time": "FT",
     "scorers": "{\"C. Larin 79'\"} | {\"Jovo Lukić 21'\"}",
+    "cards": ""
+  },
+  "g7": {
+    "h": "1",
+    "a": "1",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "C. Larin 11' | Jovo Lukić 21'",
     "cards": ""
   }
 }
