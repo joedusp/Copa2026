@@ -165,35 +165,31 @@ const state   = loadJSON(STATE_FILE);
 const results = loadJSON(RESULTS_FILE);
 const now     = Date.now();
 
-// ══ JANELA DE POLLING ══
-// Verificamos se há alguma partida ativa ou próxima (±30 min).
-// Se não houver, não há razão para chamar a API.
+// ══ JANELA DE ACTIVIDADE ══
+// O Actions controla a frequência via cron. O bot apenas verifica se há
+// algo para buscar — jogos ativos, travados, ou sem resultado ainda.
 const FINISHED_STATUSES = ['FT', 'AET', 'PEN'];
 
 let hasActiveMatch = false;
-let pollInterval   = 15; // minutos padrão
 
 for (const m of ALL_MATCHES) {
   const start    = getMatchTimeUTC(m.d, m.t);
   const diffMins = (now - start) / 60000;
   const r        = results[m.id];
-  const isFinished  = r && FINISHED_STATUSES.includes(r.status);
-  const stuck       = r && r.status && !isFinished;
+  const isFinished = r && FINISHED_STATUSES.includes(r.status);
+  const stuck      = r && r.status && !isFinished;
 
   // Caso 1: janela normal — 30 min antes até 4 horas depois do início
   if (diffMins >= -30 && diffMins <= 240) {
     hasActiveMatch = true;
-    if ((diffMins >= 75 && diffMins <= 110) || diffMins >= 130) pollInterval = 10;
   }
 
-  // Caso 2: jogo travado em status não-finalizado (ex.: LIVE após queda de API)
+  // Caso 2: jogo travado em status não-finalizado
   if (stuck) {
     hasActiveMatch = true;
   }
 
-  // Caso 3 — CORREÇÃO DO BUG: jogo já deveria ter acontecido mas sem resultado
-  // gravado ainda (results.json vazio ou sem entrada para este jogo).
-  // Garante busca retroativa até 7 dias após o início.
+  // Caso 3: jogo já deveria ter acontecido mas ainda sem resultado gravado
   if (diffMins > 0 && diffMins <= 10080 && !isFinished && !stuck) {
     hasActiveMatch = true;
   }
@@ -201,14 +197,6 @@ for (const m of ALL_MATCHES) {
 
 if (!hasActiveMatch) {
   console.log('Nenhuma partida pendente ou na janela ativa. Encerrando.');
-  process.exit(0);
-}
-
-const lastPoll        = state.lastPoll || 0;
-const minsSinceLastPoll = (now - lastPoll) / 60000;
-
-if (minsSinceLastPoll < pollInterval) {
-  console.log(`Intervalo de ${pollInterval} min não atingido (${minsSinceLastPoll.toFixed(1)} min desde o último poll). Encerrando.`);
   process.exit(0);
 }
 
