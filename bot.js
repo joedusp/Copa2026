@@ -271,12 +271,13 @@ function processGames(chunks) {
     // Precisamos limpar as chaves e aspas para exibir corretamente.
     function parseScorers(raw) {
       if (!raw || raw === 'null' || raw === '{}' || raw === '') return '';
-      // Remove outer braces
+      // A API retorna: {"Nome 45'","Nome 67'"} ou {"Nome 45'"}
+      // 1. Remove chaves externas
       let inner = raw.replace(/^\{|\}$/g, '').trim();
       if (!inner) return '';
-      // Split by comma+quote separators used for multiple scorers
-      const parts = inner.split(/","|\\",\\"/).map(p =>
-        p.replace(/^\\"?|\\?"?$/g, '').replace(/\\"/g, '').trim()
+      // 2. Divide por ',' respeitando aspas
+      const parts = inner.split('","').map(p =>
+        p.replace(/^"+|"+$/g, '').trim()
       ).filter(Boolean);
       return parts.join(', ');
     }
