@@ -12,15 +12,7 @@
     "a": "1",
     "status": "FT",
     "time": "FT",
-    "scorers": "I.B. Hwang 67', H.G. Oh 80' | L. Krejčí 59'",
-    "cards": ""
-  },
-  "g3": {
-    "h": "1",
-    "a": "1",
-    "status": "FT",
-    "time": "FT",
-    "scorers": "{\"C. Larin 79'\"} | {\"Jovo Lukić 21'\"}",
+    "scorers": "\"I.B. Hwang 67', H.G. Oh 80' | \"L. Krejčí 59'",
     "cards": ""
   },
   "g7": {
@@ -28,7 +20,7 @@
     "a": "1",
     "status": "FT",
     "time": "FT",
-    "scorers": "C. Larin 11' | Jovo Lukić 21'",
+    "scorers": "\"C. Larin 11' | \"Jovo Lukić 21'",
     "cards": ""
   },
   "g19": {
@@ -36,7 +28,7 @@
     "a": "1",
     "status": "FT",
     "time": "FT",
-    "scorers": "D. Bobadilla 7'(OG), F. Balogun 31', F. Balogun 45'+5', G. Reyna 90'+8' | Maurício 73'",
+    "scorers": "\"D. Bobadilla 7'(OG), F. Balogun 31', F. Balogun 45'+5', G. Reyna 90'+8' | \"Maurício 73'",
     "cards": ""
   },
   "g8": {
@@ -44,7 +36,7 @@
     "a": "1",
     "status": "FT",
     "time": "FT",
-    "scorers": "B. Khoukhi 90'+5' | Breel Embolo 17' (p)",
+    "scorers": "\"B. Khoukhi 90'+5' | \"Breel Embolo 17' (p)",
     "cards": ""
   },
   "g13": {
@@ -52,7 +44,7 @@
     "a": "1",
     "status": "live",
     "time": "live",
-    "scorers": "V. Júnior 32' | I. Saibari 21'",
+    "scorers": "\"V. Júnior 32' | \"I. Saibari 21'",
     "cards": ""
   }
 }
