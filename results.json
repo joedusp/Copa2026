@@ -4,7 +4,7 @@
     "a": "0",
     "status": "FT",
     "time": "FT",
-    "scorers": "J. Quiñones 9', R. Jiménez 67'",
+    "scorers": "“J. Quiñones 9'”,”R. Jiménez 67'”",
     "cards": ""
   },
   "g2": {
@@ -44,7 +44,15 @@
     "a": "1",
     "status": "FT",
     "time": "FT",
-    "scorers": "D. Bobadilla 7' (OG), F. Balogun 31', F. Balogun 45'+5', G. Reyna 90'+8' | Maurício 73'",
+    "scorers": "D. Bobadilla 7'(OG), F. Balogun 31', F. Balogun 45'+5', G. Reyna 90'+8' | Maurício 73'",
+    "cards": ""
+  },
+  "g14": {
+    "h": "0",
+    "a": "1",
+    "status": "live",
+    "time": "live",
+    "scorers": "J. McGinn 28'",
     "cards": ""
   }
 }
