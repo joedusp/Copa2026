@@ -191,6 +191,19 @@ if (!hasActiveMatch) {
   process.exit(0);
 }
 
+// ══ LIMPEZA DE DADOS FANTASMA ══
+// Remove entradas com status FT para jogos que ainda não aconteceram.
+// Isso corrige lixo deixado por versões anteriores do bot.
+for (const m of GM) {
+  const start    = getMatchTimeUTC(m.d, m.t);
+  const diffMins = (now - start) / 60000;
+  const r        = results[m.id];
+  if (r && FINISHED_STATUSES.includes(r.status) && diffMins < -30) {
+    console.log(`Removendo dado fantasma de ${m.id} (${m.h}×${m.a}) agendado para o futuro.`);
+    delete results[m.id];
+  }
+}
+
 // ══ FETCH ══
 console.log(`Buscando dados em worldcup26.ir...`);
 
@@ -258,9 +271,14 @@ function processGames(chunks) {
     // Precisamos limpar as chaves e aspas para exibir corretamente.
     function parseScorers(raw) {
       if (!raw || raw === 'null' || raw === '{}' || raw === '') return '';
-      const inner = raw.replace(/^\{|\}$/g, '').trim();
+      // Remove outer braces
+      let inner = raw.replace(/^\{|\}$/g, '').trim();
       if (!inner) return '';
-      return inner.replace(/^"|"$/g, '').split('","').join(', ');
+      // Split by comma+quote separators used for multiple scorers
+      const parts = inner.split(/","|\\",\\"/).map(p =>
+        p.replace(/^\\"?|\\?"?$/g, '').replace(/\\"/g, '').trim()
+      ).filter(Boolean);
+      return parts.join(', ');
     }
     const hScorers = parseScorers(game.home_scorers);
     const aScorers = parseScorers(game.away_scorers);
