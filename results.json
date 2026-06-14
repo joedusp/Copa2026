@@ -50,9 +50,17 @@
   "g14": {
     "h": "0",
     "a": "1",
-    "status": "live",
-    "time": "live",
+    "status": "FT",
+    "time": "FT",
     "scorers": "J. McGinn 28'",
+    "cards": ""
+  },
+  "g20": {
+    "h": "2",
+    "a": "0",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Nestory Irankunda 27', C. Metcalfe 75'",
     "cards": ""
   }
 }
