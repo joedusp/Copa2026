@@ -108,15 +108,23 @@
     "a": "1",
     "status": "FT",
     "time": "FT",
-    "scorers": "محمد هانی 66' | امام آشور 19'",
+    "scorers": "Mohamed Hany 66' | Emam Ashour 20'",
     "cards": ""
   },
   "g44": {
     "h": "1",
-    "a": "0",
+    "a": "1",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Abdallh Alamri 41' | Maksimilianv Araivkhv 80'",
+    "cards": ""
+  },
+  "g38": {
+    "h": "1",
+    "a": "1",
     "status": "live",
     "time": "live",
-    "scorers": "Abdallh Alamri 41'",
+    "scorers": "Ramin Rzaiian 32' | Ali Jast 7'",
     "cards": ""
   }
 }
