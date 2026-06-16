@@ -116,7 +116,7 @@
     "a": "1",
     "status": "FT",
     "time": "FT",
-    "scorers": "Abdallh Alamri 41' | Maksimilianv Araivkhv 80'",
+    "scorers": "Abdulelah Al-Amri 41' | Maximiliano Araújo 80'",
     "cards": ""
   },
   "g38": {
@@ -124,7 +124,15 @@
     "a": "2",
     "status": "FT",
     "time": "FT",
-    "scorers": "Ramin Rzaiian 32', Mohamed Mhbi 64' | Ali Jast 7', Ali Jast 54'",
+    "scorers": "Ramin Rezaiian 32', Mohammad Mohebi 64' | Elijah Just 7', Elijah Just 54'",
+    "cards": ""
+  },
+  "g49": {
+    "h": "1",
+    "a": "0",
+    "status": "live",
+    "time": "live",
+    "scorers": "Kilian Ambaph 66'",
     "cards": ""
   }
 }
