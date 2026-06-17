@@ -140,7 +140,23 @@
     "a": "4",
     "status": "FT",
     "time": "FT",
-    "scorers": "Aimn Hsin 39' | Arling Halnd 29', Arling Halnd 43', Liv Avstigard 76', Aimn Hsin 90+7'",
+    "scorers": "Aymen Hussein 39' | Erling Haaland 29', Erling Haaland 43', Leo Østigård 76', Aymen Hussein 90+7'",
+    "cards": ""
+  },
+  "g56": {
+    "h": "1",
+    "a": "0",
+    "status": "live",
+    "time": "live",
+    "scorers": "Rvmanv Ashmid 20'",
+    "cards": ""
+  },
+  "g55": {
+    "h": "3",
+    "a": "0",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Lionel Messi 17', Lionel Messi 60', Lionel Messi 76'",
     "cards": ""
   }
 }
