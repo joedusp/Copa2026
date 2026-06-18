@@ -196,15 +196,23 @@
     "a": "1",
     "status": "FT",
     "time": "FT",
-    "scorers": "mikhal Sadilk 6'",
+    "scorers": "‫mikhal Sadilk 6'",
     "cards": ""
   },
   "g10": {
-    "h": "0",
+    "h": "4",
+    "a": "1",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Jvhan Mnzambi 74', Rvbn Vargas 84', Jvhan Mnzambi 90' | Armin Mhmich 90+3'",
+    "cards": ""
+  },
+  "g9": {
+    "h": "1",
     "a": "0",
     "status": "live",
     "time": "live",
-    "scorers": "",
+    "scorers": "Kail Larin 16'",
     "cards": ""
   }
 }
