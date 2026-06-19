@@ -226,8 +226,8 @@
   "g21": {
     "h": "2",
     "a": "0",
-    "status": "live",
-    "time": "live",
+    "status": "FT",
+    "time": "FT",
     "scorers": "Kamrvn Bargs 11', Alex Freeman 43'",
     "cards": ""
   }
