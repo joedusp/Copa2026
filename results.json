@@ -234,9 +234,17 @@
   "g16": {
     "h": "0",
     "a": "1",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Asmaail Saibari 2'",
+    "cards": ""
+  },
+  "g15": {
+    "h": "3",
+    "a": "0",
     "status": "live",
     "time": "live",
-    "scorers": "Asmaail Saibari 2'",
+    "scorers": "Matheus Cunha 23', Matheus Cunha 36', Vinícius Júnior 45+3'",
     "cards": ""
   }
 }
