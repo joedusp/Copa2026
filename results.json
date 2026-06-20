@@ -242,9 +242,17 @@
   "g15": {
     "h": "3",
     "a": "0",
-    "status": "live",
-    "time": "live",
+    "status": "FT",
+    "time": "FT",
     "scorers": "Matheus Cunha 23', Matheus Cunha 36', Vinícius Júnior 45+3'",
+    "cards": ""
+  },
+  "g22": {
+    "h": "0",
+    "a": "1",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Matías Galarza 2'",
     "cards": ""
   }
 }
