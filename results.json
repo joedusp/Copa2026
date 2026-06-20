@@ -256,11 +256,19 @@
     "cards": ""
   },
   "g33": {
-    "h": "4",
+    "h": "5",
     "a": "1",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Brian Brobbey 5', Brian Brobbey 17', Kvdi Khakpv 47', Kvdi Khakpv 54', Crysencio Summerville 89' | Anthony Elanga 59'",
+    "cards": ""
+  },
+  "g27": {
+    "h": "0",
+    "a": "0",
     "status": "live",
     "time": "live",
-    "scorers": "Brian Brobbey 5', Brian Brobbey 17', Kvdi Khakpv 47', Kvdi Khakpv 54' | Anthony Elanga 59'",
+    "scorers": "",
     "cards": ""
   }
 }
