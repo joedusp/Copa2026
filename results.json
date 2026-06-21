@@ -270,5 +270,21 @@
     "time": "FT",
     "scorers": "Dniz Avndav 68', Dniz Avndav 90+4' | Franck Kessié 30'",
     "cards": ""
+  },
+  "g28": {
+    "h": "0",
+    "a": "0",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "",
+    "cards": ""
+  },
+  "g34": {
+    "h": "0",
+    "a": "2",
+    "status": "live",
+    "time": "live",
+    "scorers": "Daichi Kamada 4', Aiash Ivida 31'",
+    "cards": ""
   }
 }
