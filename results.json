@@ -290,8 +290,8 @@
   "g39": {
     "h": "0",
     "a": "0",
-    "status": "live",
-    "time": "live",
+    "status": "FT",
+    "time": "FT",
     "scorers": "",
     "cards": ""
   },
@@ -301,6 +301,14 @@
     "status": "FT",
     "time": "FT",
     "scorers": "Lamine Yamal 10', Mikel Oyarzabal 21', Mikel Oyarzabal 24', Hassan Mohamed Altmbkti 49'",
+    "cards": ""
+  },
+  "g46": {
+    "h": "0",
+    "a": "0",
+    "status": "live",
+    "time": "live",
+    "scorers": "",
     "cards": ""
   }
 }
