@@ -313,10 +313,10 @@
   },
   "g40": {
     "h": "1",
-    "a": "0",
-    "status": "live",
-    "time": "live",
-    "scorers": "Fin Svrman 15'",
+    "a": "3",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Fin Svrman 15' | Mostafa Ziko 58', Mohamed Salah 67', Mahmoud Hassan Trezeguet 82'",
     "cards": ""
   }
 }
