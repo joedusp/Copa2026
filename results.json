@@ -320,11 +320,19 @@
     "cards": ""
   },
   "g57": {
-    "h": "1",
+    "h": "2",
+    "a": "0",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Lionel Messi 38', Lionel Messi 90+5'",
+    "cards": ""
+  },
+  "g51": {
+    "h": "0",
     "a": "0",
     "status": "live",
     "time": "live",
-    "scorers": "Lionel Messi 38'",
+    "scorers": "",
     "cards": ""
   }
 }
