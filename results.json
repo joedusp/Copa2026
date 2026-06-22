@@ -306,9 +306,17 @@
   "g46": {
     "h": "2",
     "a": "2",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Maximiliano Araújo 44', Agustín Canobbio 45+6' | Kevin Pina 21', Hliv Varla 61'",
+    "cards": ""
+  },
+  "g40": {
+    "h": "1",
+    "a": "0",
     "status": "live",
     "time": "live",
-    "scorers": "Maximiliano Araújo 44', Agustín Canobbio 45+6' | Kevin Pina 21', Hliv Varla 61'",
+    "scorers": "Fin Svrman 15'",
     "cards": ""
   }
 }
