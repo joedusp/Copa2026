@@ -366,5 +366,13 @@
     "time": "FT",
     "scorers": "",
     "cards": ""
+  },
+  "g70": {
+    "h": "0",
+    "a": "0",
+    "status": "live",
+    "time": "live",
+    "scorers": "",
+    "cards": ""
   }
 }
