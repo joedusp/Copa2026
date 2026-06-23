@@ -352,11 +352,19 @@
     "cards": ""
   },
   "g63": {
-    "h": "4",
+    "h": "5",
+    "a": "0",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Cristiano Ronaldo 6', Nvnv Mndz 17', Cristiano Ronaldo 39', Abdalvhid Namtvf 60', Rafael Leão 87'",
+    "cards": ""
+  },
+  "g69": {
+    "h": "0",
     "a": "0",
     "status": "live",
     "time": "live",
-    "scorers": "Cristiano Ronaldo 6', Nvnv Mndz 17', Cristiano Ronaldo 39', Abdalvhid Namtvf 60'",
+    "scorers": "",
     "cards": ""
   }
 }
