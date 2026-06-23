@@ -328,19 +328,27 @@
     "cards": ""
   },
   "g51": {
-    "h": "2",
+    "h": "3",
     "a": "0",
-    "status": "live",
-    "time": "live",
-    "scorers": "Kylian Mbappé 14', Kylian Mbappé 54'",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Kylian Mbappé 14', Kylian Mbappé 54', Ousmane Dembélé 66'",
     "cards": ""
   },
   "g52": {
-    "h": "0",
-    "a": "0",
+    "h": "3",
+    "a": "2",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Markvs Hlmgrn Pdrsn 43', Erling Haaland 48', Erling Haaland 58' | Ismaïla Sarr 53', Ismaïla Sarr 90+3'",
+    "cards": ""
+  },
+  "g58": {
+    "h": "1",
+    "a": "1",
     "status": "live",
     "time": "live",
-    "scorers": "",
+    "scorers": "Al Rashdan 36' | Nzir Bnbvali 69'",
     "cards": ""
   }
 }
