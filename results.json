@@ -328,11 +328,19 @@
     "cards": ""
   },
   "g51": {
-    "h": "1",
+    "h": "2",
     "a": "0",
     "status": "live",
     "time": "live",
-    "scorers": "Kylian Mbappé 14'",
+    "scorers": "Kylian Mbappé 14', Kylian Mbappé 54'",
+    "cards": ""
+  },
+  "g52": {
+    "h": "0",
+    "a": "0",
+    "status": "live",
+    "time": "live",
+    "scorers": "",
     "cards": ""
   }
 }
