@@ -369,10 +369,10 @@
   },
   "g70": {
     "h": "0",
-    "a": "0",
-    "status": "live",
-    "time": "live",
-    "scorers": "",
+    "a": "1",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Ante Budimir 54'",
     "cards": ""
   }
 }
