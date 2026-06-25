@@ -430,5 +430,21 @@
     "time": "FT",
     "scorers": "Taplv Maskv 63'",
     "cards": ""
+  },
+  "g30": {
+    "h": "0",
+    "a": "1",
+    "status": "live",
+    "time": "live",
+    "scorers": "Nikvlas Ph Ph 7'",
+    "cards": ""
+  },
+  "g29": {
+    "h": "1",
+    "a": "1",
+    "status": "live",
+    "time": "live",
+    "scorers": "Nilsvn Angvlv 9' | Leroy Sané 2'",
+    "cards": ""
   }
 }
