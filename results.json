@@ -400,19 +400,19 @@
     "cards": ""
   },
   "g17": {
-    "h": "2",
+    "h": "4",
     "a": "2",
-    "status": "live",
-    "time": "live",
-    "scorers": "Achraf Hakimi 39', Asmaail Saibari 45+1' | Yassine Bounou 10', Wilson Isidor 43'",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Achraf Hakimi 39', Asmaail Saibari 45+1', Svfian Rhimi 78', Gessime Yassine 89' | Yassine Bounou 10', Wilson Isidor 43'",
     "cards": ""
   },
   "g18": {
     "h": "0",
-    "a": "2",
-    "status": "live",
-    "time": "live",
-    "scorers": "Vinícius Júnior 7', Vinícius Júnior 45+3'",
+    "a": "3",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Vinícius Júnior 7', Vinícius Júnior 45+3', Matheus Cunha 60'",
     "cards": ""
   }
 }
