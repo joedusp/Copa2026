@@ -433,18 +433,18 @@
   },
   "g30": {
     "h": "0",
-    "a": "1",
+    "a": "2",
     "status": "live",
     "time": "live",
-    "scorers": "Nikvlas Ph Ph 7'",
+    "scorers": "Nikvlas Ph Ph 7', Nikvlas Ph Ph 64'",
     "cards": ""
   },
   "g29": {
-    "h": "1",
+    "h": "2",
     "a": "1",
     "status": "live",
     "time": "live",
-    "scorers": "Nilsvn Angvlv 9' | Leroy Sané 2'",
+    "scorers": "Nilsvn Angvlv 9', Gvnzalv Plata 77' | Leroy Sané 2'",
     "cards": ""
   }
 }
