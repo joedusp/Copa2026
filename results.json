@@ -434,17 +434,33 @@
   "g30": {
     "h": "0",
     "a": "2",
-    "status": "live",
-    "time": "live",
+    "status": "FT",
+    "time": "FT",
     "scorers": "Nikvlas Ph Ph 7', Nikvlas Ph Ph 64'",
     "cards": ""
   },
   "g29": {
     "h": "2",
     "a": "1",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Nilsvn Angvlv 9', Gvnzalv Plata 77' | Leroy Sané 2'",
+    "cards": ""
+  },
+  "g36": {
+    "h": "0",
+    "a": "0",
     "status": "live",
     "time": "live",
-    "scorers": "Nilsvn Angvlv 9', Gvnzalv Plata 77' | Leroy Sané 2'",
+    "scorers": "",
+    "cards": ""
+  },
+  "g35": {
+    "h": "0",
+    "a": "2",
+    "status": "live",
+    "time": "live",
+    "scorers": "Alis Skhiri 3', Brian Brobbey 7'",
     "cards": ""
   }
 }
