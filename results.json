@@ -478,5 +478,21 @@
     "time": "FT",
     "scorers": "",
     "cards": ""
+  },
+  "g54": {
+    "h": "2",
+    "a": "0",
+    "status": "live",
+    "time": "live",
+    "scorers": "Habib Diarra 4', Ismaïla Sarr 56'",
+    "cards": ""
+  },
+  "g53": {
+    "h": "1",
+    "a": "3",
+    "status": "live",
+    "time": "live",
+    "scorers": "Thelo Aasgaard 21' | Ousmane Dembélé 7', Ousmane Dembélé 20', Ousmane Dembélé 32'",
+    "cards": ""
   }
 }
