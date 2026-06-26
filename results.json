@@ -448,19 +448,19 @@
     "cards": ""
   },
   "g36": {
-    "h": "0",
-    "a": "0",
-    "status": "live",
-    "time": "live",
-    "scorers": "",
+    "h": "1",
+    "a": "1",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Daizen Maeda 56' | Anthony Elanga 62'",
     "cards": ""
   },
   "g35": {
-    "h": "0",
-    "a": "2",
-    "status": "live",
-    "time": "live",
-    "scorers": "Alis Skhiri 3', Brian Brobbey 7'",
+    "h": "1",
+    "a": "3",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Hazm Mstvri 54' | Alis Skhiri 3', Brian Brobbey 7', Ian Fn Hkh 62'",
     "cards": ""
   }
 }
