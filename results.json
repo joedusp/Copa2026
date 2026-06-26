@@ -480,19 +480,19 @@
     "cards": ""
   },
   "g54": {
-    "h": "2",
+    "h": "5",
     "a": "0",
-    "status": "live",
-    "time": "live",
-    "scorers": "Habib Diarra 4', Ismaïla Sarr 56'",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Habib Diarra 4', Ismaïla Sarr 56', Paph Gviih 59', Paph Gviih 71', Ailman Andiaih 82'",
     "cards": ""
   },
   "g53": {
     "h": "1",
-    "a": "3",
-    "status": "live",
-    "time": "live",
-    "scorers": "Thelo Aasgaard 21' | Ousmane Dembélé 7', Ousmane Dembélé 20', Ousmane Dembélé 32'",
+    "a": "4",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Thelo Aasgaard 21' | Ousmane Dembélé 7', Ousmane Dembélé 20', Ousmane Dembélé 32', Désiré Doué 90+4'",
     "cards": ""
   }
 }
