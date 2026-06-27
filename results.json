@@ -526,5 +526,21 @@
     "time": "FT",
     "scorers": "Ali Jast 84' | Leandro Trossard 28', Leandro Trossard 50', Kevin De Bruyne 66', Romelu Lukaku 86', Alexis Saelemaekers 90+4'",
     "cards": ""
+  },
+  "g71": {
+    "h": "0",
+    "a": "0",
+    "status": "live",
+    "time": "live",
+    "scorers": "",
+    "cards": ""
+  },
+  "g72": {
+    "h": "1",
+    "a": "0",
+    "status": "live",
+    "time": "live",
+    "scorers": "Petar Sučić 31'",
+    "cards": ""
   }
 }
