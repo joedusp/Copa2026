@@ -530,17 +530,33 @@
   "g71": {
     "h": "0",
     "a": "2",
-    "status": "live",
-    "time": "live",
+    "status": "FT",
+    "time": "FT",
     "scorers": "Jvd Blingham 62', Hri Kin 67'",
     "cards": ""
   },
   "g72": {
     "h": "2",
     "a": "1",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Petar Sučić 31', Nikola Vlašić 83' | Drik Lvkasn 73'",
+    "cards": ""
+  },
+  "g66": {
+    "h": "0",
+    "a": "1",
     "status": "live",
     "time": "live",
-    "scorers": "Petar Sučić 31', Nikola Vlašić 83' | Drik Lvkasn 73'",
+    "scorers": "Aldvr Shvmvrvdvf 10'",
+    "cards": ""
+  },
+  "g65": {
+    "h": "0",
+    "a": "0",
+    "status": "live",
+    "time": "live",
+    "scorers": "",
     "cards": ""
   }
 }
