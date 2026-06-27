@@ -498,17 +498,33 @@
   "g48": {
     "h": "0",
     "a": "0",
-    "status": "live",
-    "time": "live",
+    "status": "FT",
+    "time": "FT",
     "scorers": "",
     "cards": ""
   },
   "g47": {
     "h": "0",
-    "a": "0",
-    "status": "live",
-    "time": "live",
-    "scorers": "",
+    "a": "1",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Álex Baena 42'",
+    "cards": ""
+  },
+  "g42": {
+    "h": "1",
+    "a": "1",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Mahmoud Saber 5' | Ramin Rezaeian 14'",
+    "cards": ""
+  },
+  "g41": {
+    "h": "1",
+    "a": "5",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Ali Jast 84' | Leandro Trossard 28', Leandro Trossard 50', Kevin De Bruyne 66', Romelu Lukaku 86', Alexis Saelemaekers 90+4'",
     "cards": ""
   }
 }
