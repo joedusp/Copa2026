@@ -558,5 +558,21 @@
     "time": "FT",
     "scorers": "",
     "cards": ""
+  },
+  "g59": {
+    "h": "1",
+    "a": "3",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Mvsi Altmari 55' | Jivani Lv Slsv 19', Lautaro Martínez 31'(P), Lionel Messi 80'",
+    "cards": ""
+  },
+  "g60": {
+    "h": "3",
+    "a": "3",
+    "status": "FT",
+    "time": "FT",
+    "scorers": "Rafik Blghali 45', Riyad Mahrez 60', Riyad Mahrez 90+3' | Marko Arnautović 28', Marcel Sabitzer 55', Saša Kalajdžić 90+6'",
+    "cards": ""
   }
 }
